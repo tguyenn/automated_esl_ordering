@@ -4,7 +4,7 @@
 function parseForm(e) {
   const response = e.response.getItemResponses();
 
-  for (const responseAnswer of response) { // for loop that iterates through each question and parses data
+  for (const responseAnswer of response) { // for loop that iterates through each question and parses data. Only iterates through questions with responses
     const question = responseAnswer.getItem().getTitle();
     const answer = responseAnswer.getResponse();
     let parts = [];
@@ -34,22 +34,12 @@ function parseForm(e) {
         }
     }
 
-    // debug
     if(question.includes("File Upload")) {
       hasSpreadsheet = true;
-      inputSheetID = answer; // returns sheet id in an array of 1 element for whatever reason
-      inputSheetID = inputSheetID[0];
-      inputSheetID = inputSheetID.replace(/[\[\]]/g, ""); // sanitize brackets
-      return; // break because we dont care about the form values anymore
+      inputSheetID = answer; // returns sheet id in an array (im assuming there would be multiple array elements if there were multiple files)
+      inputSheetID = inputSheetID[0]; // get string
+      return; // break because we dont care about the rest of the form values anymore
     }
-
-    // // check if spreadsheet
-    // if(question.includes("Upload Spreadsheet?")) {
-    //   if(answer === "Yes") {
-    //     hasSpreadsheet = true;
-    //   }
-    // }
-
 
     // parse item name
     if(question.includes("Name")) {
@@ -94,7 +84,11 @@ function parseForm(e) {
       phoneNumber = phoneNumber.replace(/^(\d{3})(\d{3})(\d{4}).*/, "$1-$2-$3"); // reformat to be xxx-xxx-xxxx
     }
 
-    if (question === "Vendor") {
+    if(question.includes("Special Notes?")) {
+      specialNotes = answer;
+    }
+
+    if (question.includes("Vendor")) {
       vendorName = answer;
       if(answer === "Amazon") {
         discordTag = "<@365619835939455005>"; // ping annie 
@@ -102,7 +96,7 @@ function parseForm(e) {
       }
     }
 
-    if (question === "Committee") {
+    if (question.includes("Committee")) {
       thumbNailUrl = "https://i.imgur.com/jvF3FoH.jpg";  // default
       committeeName = "General";
       switch(answer) {
@@ -128,7 +122,7 @@ function parseForm(e) {
           break;
       }
     }
-  } // end for loop that iterates through all form questions
+  } // end for loop that iterates through form questions
 
   // begin stuff that runs ONCE ===============================================
 

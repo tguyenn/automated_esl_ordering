@@ -12,7 +12,7 @@ function replaceForm() {
 
   let today = new Date();
   today.setDate(today.getDate() + 7); // 7 days out from today
-  formattedDate = today.getFullYear() + '-' + 
+  formattedDate = today.getFullYear() + '-' + // YYYY-MM-DD (acceptable format for URL)
                       (today.getMonth() + 1).toString().padStart(2, '0') + '-' +
                       today.getDate().toString().padStart(2, '0');
 

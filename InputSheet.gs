@@ -1,30 +1,20 @@
 // read input google sheet and parse data into global variables
 
-
 function readSheet() {
 
-// Logger.log(committeeName);
-// Logger.log(vendorName);
-// Logger.log(email);
-// Logger.log(phoneNumber);
-// Logger.log(shippingType);
-// Logger.log(shipping);
-// Logger.log(specialNotes);
-
-  const spreadsheet = SpreadsheetApp.openById(inputSheetID);
+  const spreadsheet = SpreadsheetApp.openById("10RwNdGDrd2vkH5v3Wp1miU9Ei_wpLrtD6UOWaGKFxQU"); // https://docs.google.com/spreadsheets/d/10RwNdGDrd2vkH5v3Wp1miU9Ei_wpLrtD6UOWaGKFxQU/edit?gid=0#gid=0
   const sheet = spreadsheet.getSheetByName("Sheet1"); 
 
 
   let lastRow = sheet.getRange("A1:A").getValues();
   lastRow = lastRow.filter(String).length;
 
-  Logger.log("input sheet lastRow: " + lastRow);
-
   // go from X2:XlastRow and store data into respective variables
 
-  for(i = 1; i < 6; i++) {
+  for(i = 1; i < 6; i++) { // for each data column
     let range = sheet.getRange(2, i, lastRow - 1); // Read from row 2 to the last row in the column
     let columnData = range.getValues(); // This returns a 2D array (e.g., [[value1], [value2], ...])
+
     let dataArray = columnData.map(row => row[0]); // Flatten to a 1D array
 
     switch (i) {
@@ -46,7 +36,7 @@ function readSheet() {
     }
   }
 
-  let miscData = sheet.getRange('H3:H9').getValues();
+  let miscData = sheet.getRange('H3:H9').getValues(); // put data from table on right into an array
   miscData = miscData.map(row => row[0]); // flatten to 1D array
 
   committeeName = miscData[0];
@@ -62,10 +52,7 @@ function readSheet() {
   phoneNumber = phoneNumber.toString().replace(/\D/g, ""); // sanitize phoneNumber to be only numbers
   phoneNumber = phoneNumber.replace(/^(\d{3})(\d{3})(\d{4}).*/, "$1-$2-$3"); // reformat to be xxx-xxx-xxxx
 
-  if(vendorName == "Amazon") {
-    discordTag = "<@365619835939455005>"; // ping annie 
-    isAmazon = true;
-  }
+
 
   switch(committeeName) {
     case "VEXU":
@@ -90,10 +77,23 @@ function readSheet() {
       break;
   }
 
+  if(vendorName == "Amazon" || vendorName == "amazon") {
+    discordTag = "<@365619835939455005>"; // ping annie 
+    shipping = 0; // no shipping expense from Amazon orders
+    isAmazon = true;
+  }
+
   for(let i = 0; i < itemsOrdered; i++) {
     totalPrice += (parseFloat(priceArr[i]) * parseInt(quantityArr[i]));
   }
   totalPrice += parseFloat(shipping);
+
+  if(email == "") {
+    email = "N/A";
+  }
+  if(phoneNumber == "") {
+    phoneNumber = "N/A";
+  }
 
   if (totalPrice > 1500) { // "easter egg" or wtv
     footerUrl = "https://i.imgur.com/1kqpus1.jpg"
@@ -104,4 +104,12 @@ function readSheet() {
     thumbNailUrl = "https://www.crownbio.com/hubfs/ras-signaling-pathways-thumb.jpg";
   }
 
+  clearSheet(lastRow, sheet); // clear sheet for next use
+}
+
+// delete data from template sheet after reading from it
+function clearSheet(lastRow, sheet) {
+  let range = sheet.getRange(2, 1, lastRow, 5); 
+  range.clearContent(); // clear main data
+  sheet.getRange('H3:H9').clearContent(); // clear 
 }

@@ -9,20 +9,26 @@ let email = "N/A"; // for notification to form submitter
 let phoneNumber = "N/A" // for notification to form submitter
 let committeeName = "";
 let vendorName = "";
-let specialNotes = "";
+let specialNotes = "N/A";
 let shippingType = "N/A";
 let itemsOrdered = 0;
 let shipping = 0;
 let totalPrice = 0;
 let isAmazon = false;
-let hasSpreadsheet = false;
+let hasSpreadsheet = false; // if user submits spreadsheet
 let eslLinkRes = "";
+let amazonLink = "";
 let nameArr = [];
 let quantityArr = [];
 let linksArr = [];
 let priceArr = [];
 let descriptionArr = [];
 
+const properties = PropertiesService.getScriptProperties().getProperties(); // loads properties map with values defined in project properties (Settings > scroll down)
+
+
+
+// note: there is no particular order to this --- the only order that matters is that parseForm() and readSheet() are placed first and second respectively
 function mainOnSubmit(e) {
   
   try{
@@ -58,6 +64,13 @@ function mainOnSubmit(e) {
     Logger.log("Error processing getSheet() with " + e);
     postKill("Error processing getSheet() with " + e);
     return;
+    }
+  } else {
+    try {
+      generateAmazonLink();
+    } catch(e) {
+      Logger.log("Error processing generateAmazonLink() with " + e);
+      postKill("Error processing generateAmazonLink() with " + e);
     }
   }
 
