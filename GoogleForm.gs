@@ -1,6 +1,7 @@
+/**
+ *  reads answers from Google Form and edits global variables accordingly
+ */
 
-
-// reads answers from Google Form and edits global variables accordingly
 function parseForm(e) {
   const response = e.response.getItemResponses();
 

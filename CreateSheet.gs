@@ -1,4 +1,6 @@
-// create new sheet and populate with data
+/**
+ *  create new sheet and populate with data
+ */
 
 // publicly exposed function that creates URL for newly generated sheet
 function getSheet() {

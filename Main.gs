@@ -18,6 +18,7 @@ let isAmazon = false;
 let hasSpreadsheet = false; // if user submits spreadsheet
 let eslLinkRes = "";
 let amazonLink = "";
+let specialErrorMessage = "";
 let nameArr = [];
 let quantityArr = [];
 let linksArr = [];
@@ -71,6 +72,7 @@ function mainOnSubmit(e) {
     } catch(e) {
       Logger.log("Error processing generateAmazonLink() with " + e);
       postKill("Error processing generateAmazonLink() with " + e);
+      return;
     }
   }
 

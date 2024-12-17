@@ -1,4 +1,6 @@
-// edit master budget sheet
+/** 
+ * edit master budget sheet
+ * */ 
 
 function editMasterSheet() {
   let sheetID = "1uw0LqBbjbEuq2X-QjBsj0W6ebI_K2bclHLlOi9tjy1Q";

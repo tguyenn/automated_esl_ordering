@@ -1,6 +1,10 @@
-// post embed to discord
-// const DISCORD_POST_URL = properties['LIVE_DISCORD_WEBHOOK_URL']; // defined in script properties (Script Settings > Scroll to bottom)
-const DISCORD_POST_URL = properties['TEST_DISCORD_WEBHOOK_URL'];
+/**
+ *  post embed to discord
+ */
+
+
+const DISCORD_POST_URL = properties['LIVE_DISCORD_WEBHOOK_URL']; // defined in script properties (Script Settings > Scroll to bottom)
+// const DISCORD_POST_URL = properties['TEST_DISCORD_WEBHOOK_URL'];
 
 
 const randomColor = Math.floor(Math.random() * 0xFFFFFF);
@@ -10,8 +14,6 @@ let options; // text customizations for embed
 function postEmbed() {
   preparePayload();
   response = UrlFetchApp.fetch(DISCORD_POST_URL, options);
-  // Logger.log("Response Code: " + response.getResponseCode());
-  // Logger.log("Response Body: " + response.getContentText());
 }
 
 function preparePayload() {
@@ -75,7 +77,7 @@ function postKill(process) {
           "Content-Type": "application/json",
           },
     "payload": JSON.stringify({
-    "content": discordTag, // this is the unformatted text above the rich embed
+    "content": discordTag + "\n" + specialErrorMessage, // this is the unformatted text above the rich embed
     "embeds": [{
       "title": `something broke lmao (${process})`,
       "color": randomColor,

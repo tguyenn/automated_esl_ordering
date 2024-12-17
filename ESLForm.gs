@@ -1,4 +1,7 @@
-// edit and return esl link as string based on global variables
+/**
+ * edit and return esl link as string based on global variables
+ */
+
 
 let amazonBuyerName = "Annie Vu"; // for Amazon ESL form
 
@@ -29,11 +32,14 @@ function replaceForm() {
   eslLinkRes = eslLinkRes.replace("email", email);
   eslLinkRes = eslLinkRes.replace("date", formattedDate);
   eslLinkRes = eslLinkRes.replace("phoneNumber", phoneNumber);
+
+  /**
+   * COLIN TAN LOOK HERE LOOK HERE LOOK HERE this is what uneed to change for the chatgpt save me of all time
+   */
   eslLinkRes = eslLinkRes.replace("description", ""); // fill this in manually in form
   eslLinkRes = eslLinkRes.replace("reasonforrequest", ""); // fill this in manually in form
   eslLinkRes = eslLinkRes.replace(/ /g, "%20"); // replace ALL spaces with %20   
   return eslLinkRes;
 }
-
 
 
