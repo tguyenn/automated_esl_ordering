@@ -1,4 +1,4 @@
-This project intends to lighten the load on UT IEEE RAS'budget management because no one was doing it
+This project intends to lighten the workload on UT IEEE RAS' budget management because no one was doing it
 
 Documentation:
 https://docs.google.com/document/d/1uZWvn3qMgA4_hsv2KhPhUyuyTWPC9gwCCOcnSSpwB9Q/edit?tab=t.0
