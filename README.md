@@ -15,6 +15,6 @@ Overview:
         1) Generate ESL Form
         1) Generate new Google Sheet and place it in this [Drive folder](https://drive.google.com/drive/u/2/folders/1_Kgx5IAtx_0nBMLRLbzc3MJvsFQBVyMp)
 
-1) Script inserts data into our[Master budget sheet](https://docs.google.com/spreadsheets/d/1uw0LqBbjbEuq2X-QjBsj0W6ebI_K2bclHLlOi9tjy1Q/edit?gid=0#gid=0)
+1) Script inserts data into our [Master budget sheet](https://docs.google.com/spreadsheets/d/1uw0LqBbjbEuq2X-QjBsj0W6ebI_K2bclHLlOi9tjy1Q/edit?gid=0#gid=0)
 
 1) Script publishes data to a Discord channel via webhook
